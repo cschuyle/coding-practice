@@ -42,6 +42,8 @@ class NaiveTwoSum implements TwoSum {
     }
 }
 
+// TODO: The next 2 don't handle the case where a value appears more than once in the input !!
+
 class EfficientTwoSum implements TwoSum {
 
     @Override

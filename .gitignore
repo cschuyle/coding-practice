@@ -1,0 +1,7 @@
+# IntelliJ
+.idea
+*.iml
+*.ipr
+
+# Java compiled artifacts
+*.class

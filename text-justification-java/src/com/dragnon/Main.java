@@ -13,8 +13,6 @@ public class Main {
     }
 }
 
-// TODO This solution is WAY too complicated, it makes me sad.
-
 class Solution {
     public List<String> fullJustify(String[] words, int maxWidth) {
         List<String> output = new ArrayList<>();
@@ -57,33 +55,28 @@ class Solution {
     }
 
     private String outputNonLastLine(List<String> words, int maxWidth) {
+        if (words.size() == 1) {
+            return outputLastLine(words, maxWidth);
+        }
         var line = new StringBuilder();
 
         // Compute total word length
         int wordLengthSum = words.stream().mapToInt(String::length).sum();
 
-        int numWords =  words.size();
-
-        // Compute quotient and remainder
-        int quotient = 1, remainder = 0;
-        if (numWords > 1) {
-            quotient = (maxWidth - wordLengthSum) / (numWords - 1);
-            remainder = (maxWidth - wordLengthSum) % (numWords - 1);
+        int numWords = words.size();
+        int totalSpaces = maxWidth - wordLengthSum;
+        int[] spaceCounts = new int[numWords - 1];
+        for (int i = 0; i < totalSpaces; ++i) {
+            spaceCounts[i % (numWords - 1)] += 1;
         }
 
-        // Join using quotient+1 spaces for remainder times, then just quotient
         int i = 0;
         for (String word : words) {
             line.append(word);
-            if (i == words.size() - 1) {
-                appendSpaces(line, maxWidth - line.length());
-                return line.toString();
+            if (i == numWords - 1) {
+                break;
             }
-            int padChars = quotient;
-            if (i < remainder) {
-                padChars++;
-            }
-            appendSpaces(line, padChars);
+            appendSpaces(line, spaceCounts[i]);
             i++;
         }
         return line.toString();

@@ -22,7 +22,7 @@ class Solution {
         if (x == 0 || x == 1) {
             return x;
         }
-        int begin = 2, end = x/2;
+        int begin = 1, end = x/2;
         while (begin <= end) {
             int center = begin + (end - begin) / 2;
             long squared = (long) center * center;

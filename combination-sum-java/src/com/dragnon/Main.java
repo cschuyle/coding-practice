@@ -31,8 +31,8 @@ class Solution {
             return;
         }
         int candidate = candidates[candidateIndex];
-        if (candidate == 0) {
-            throw new IllegalArgumentException("Can't use 0");
+        if (candidate <= 0) {
+            throw new IllegalArgumentException("All inputs must be > 0");
         }
         doit(results, candidates, target, candidateIndex + 1, new ArrayList<>(accumulator), sum);
         while (sum + candidate <= target) {
